@@ -22,3 +22,37 @@ while user_input != 'play'
     players.push({name: user_input})
   end
 end
+
+winner = {
+  name: '',
+  rank: 0
+}
+
+players.each_with_index {|player, index|
+  card = deck[index]
+rank = 0
+case card[0]
+when (2..10)
+  rank = card[0] - 1
+when 'J'
+  rank=10
+when 'Q'
+  rank = 11
+when 'K'
+  rank = 12
+when 'A'
+  rank = 13
+end
+
+# if winner[:rank] > rank
+#   winner[:rank] = rank
+#   winner[:name] = player[:name]
+# end
+#
+# puts "card #{card}"
+# puts "rank #{rank}"
+# puts "Winner:  #{winner}"
+
+}
+
+puts "Winner:  #{winner}"
