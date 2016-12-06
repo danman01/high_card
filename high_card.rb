@@ -1,6 +1,6 @@
 # Use these two arrays to generate a deck of cards.
-ranks = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K" ]
-suits = [ "hearts", "spades", "clubs", "diamonds" ]
+ranks = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
+suits = %w(hearts spades clubs diamonds)
 
 deck = []
 
@@ -28,31 +28,32 @@ winner = {
   rank: 0
 }
 
-players.each_with_index {|player, index|
-  card = deck[index]
-rank = 0
-case card[0]
-when (2..10)
-  rank = card[0] - 1
-when 'J'
-  rank=10
-when 'Q'
-  rank = 11
-when 'K'
-  rank = 12
-when 'A'
-  rank = 13
+def get_rank(card_value)
+  rank = nil
+  case card_value
+  when (2..10)
+    rank = card_value - 1
+  when 'J'
+    rank = 10
+  when 'Q'
+    rank = 11
+  when 'K'
+    rank = 12
+  when 'A'
+    rank = 13
+  end
+  return rank
 end
 
-# if winner[:rank] > rank
-#   winner[:rank] = rank
-#   winner[:name] = player[:name]
-# end
-#
-# puts "card #{card}"
-# puts "rank #{rank}"
-# puts "Winner:  #{winner}"
+players.each_with_index do |player, index|
+  card = deck[index]
+  card_value = card[0]
+  rank = get_rank(card_value)
 
-}
+  if winner[:rank] < rank
+    winner[:rank] = rank
+    winner[:name] = player[:name]
+  end
+end
 
-puts "Winner:  #{winner}"
+puts "Winner: #{winner[:name]}"
