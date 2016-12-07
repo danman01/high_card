@@ -3,3 +3,16 @@ ranks = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K" ]
 suits = [ "hearts", "spades", "clubs", "diamonds" ]
 
 players = []
+
+
+deck = []
+ranks.each do |a|
+  suits.each do |b|
+     deck.push([a,b])
+  end
+ end
+
+
+# Attempted a deck.shuffle! method with no results
+
+deck.shuffle!
